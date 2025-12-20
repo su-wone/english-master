@@ -65,6 +65,18 @@ body {
   height: 100%;
 }
 
+/* App Container for mobile-like view on desktop */
+.app-container {
+  width: 100%;
+  /* max-width: var(--max-width); */
+  /* Removed for full-width layout */
+  min-height: 100vh;
+  background-color: var(--background);
+  position: relative;
+  /* box-shadow: 0 0 20px rgba(0,0,0,0.05); */
+  /* Removed for full-width */
+}
+
 body {
   color: var(--text-primary);
   background: var(--background);
