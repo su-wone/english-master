@@ -45,8 +45,8 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
-    padding-bottom: 80px;
-    /* Space for bottom nav if added */
+    padding-bottom: calc(var(--bottom-nav-height) + 24px);
+    /* Space for bottom nav */
 }
 
 .cardWrapper {

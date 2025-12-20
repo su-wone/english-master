@@ -40,4 +40,6 @@
     flex: 1;
     overflow: hidden;
     position: relative;
+    margin-bottom: var(--bottom-nav-height);
+    /* Space for bottom nav */
 }
