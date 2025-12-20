@@ -1,0 +1,106 @@
+.quizContainer {
+    width: 100%;
+    max-width: 500px;
+    background-color: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    padding: 32px;
+    border: 1px solid var(--card-border);
+}
+
+.scoreSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.scoreIcon {
+    margin-bottom: 24px;
+}
+
+.scoreText {
+    font-size: 1.5rem;
+    margin: 16px 0 32px;
+    color: var(--text-primary);
+}
+
+.resetButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.resetButton:hover {
+    background-color: var(--primary-hover);
+}
+
+.questionSection {
+    width: 100%;
+}
+
+.progress {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+}
+
+.progress span {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.questionText {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    line-height: 1.4;
+}
+
+.answerSection {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.optionButton {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--background);
+    border: 2px solid var(--card-border);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+}
+
+.optionButton:hover:not(:disabled) {
+    border-color: var(--primary);
+    background-color: var(--card-bg);
+}
+
+.correct {
+    background-color: #d1fae5 !important;
+    border-color: #10b981 !important;
+    color: #065f46 !important;
+}
+
+.incorrect {
+    background-color: #fee2e2 !important;
+    border-color: #ef4444 !important;
+    color: #991b1b !important;
+}
