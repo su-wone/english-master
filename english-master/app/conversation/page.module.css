@@ -1,0 +1,43 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: var(--background);
+}
+
+.header {
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    background-color: var(--card-bg);
+    border-bottom: 1px solid var(--card-border);
+    flex-shrink: 0;
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.backButton:hover {
+    background-color: var(--card-border);
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.chatWrapper {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
