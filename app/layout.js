@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import BottomNav from "./components/BottomNav";
+import Footer from "./components/Footer";
 
 export const metadata = {
   title: "English Master",
@@ -13,6 +14,7 @@ export default function RootLayout({ children }) {
       <body>
         <div className="app-container">
           {children}
+          <Footer />
           <BottomNav />
         </div>
       </body>
