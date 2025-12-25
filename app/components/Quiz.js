@@ -1,68 +1,68 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Quiz.module.css";
 import { CheckCircle, XCircle, RefreshCw } from "lucide-react";
+import { vocabularyList } from "../data/vocabulary";
 
-const questions = [
-    {
-        id: 1,
-        question: "What is the meaning of 'Serendipity'?",
-        options: [
-            "웅변을 잘하는",
-            "뜻밖의 행운",
-            "회복력 있는",
-            "애매모호한"
-        ],
-        answer: "뜻밖의 행운"
-    },
-    {
-        id: 2,
-        question: "Which word means 'unable to be avoided'?",
-        options: [
-            "Ambiguous",
-            "Eloquent",
-            "Inevitable",
-            "Resilient"
-        ],
-        answer: "Inevitable"
-    },
-    {
-        id: 3,
-        question: "Select the synonym for 'Eloquent'.",
-        options: [
-            "Articulate",
-            "Silent",
-            "Confusing",
-            "Weak"
-        ],
-        answer: "Articulate"
-    },
-    {
-        id: 4,
-        question: "If someone is 'Resilient', they are...",
-        options: [
-            "Easily broken",
-            "Recovering quickly",
-            "Very lucky",
-            "Hard to understand"
-        ],
-        answer: "Recovering quickly"
-    },
-    {
-        id: 5,
-        question: "What does 'Ambiguous' mean?",
-        options: [
-            "Clear and direct",
-            "Open to more than one interpretation",
-            "Certain",
-            "Loud"
-        ],
-        answer: "Open to more than one interpretation"
+const QUESTION_COUNT = 10;
+
+// Helper to shuffle array
+const shuffleArray = (array) => {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
     }
-];
+    return newArray;
+};
+
+// Generate random questions
+const generateQuestions = () => {
+    const shuffledVocab = shuffleArray(vocabularyList);
+    const selectedWords = shuffledVocab.slice(0, QUESTION_COUNT);
+
+    return selectedWords.map((wordObj, index) => {
+        // Randomly choose question type: 0 = Meaning, 1 = Word, 2 = Example Blank
+        const type = Math.floor(Math.random() * 3);
+        let question = "";
+        let answer = "";
+        let options = [];
+
+        // Get 3 random detractors
+        const detractors = shuffleArray(vocabularyList.filter(v => v.id !== wordObj.id))
+            .slice(0, 3);
+
+        if (type === 0) {
+            // Type 0: What is the meaning of 'Word'?
+            question = `What is the meaning of '${wordObj.word}'?`;
+            answer = wordObj.meaning;
+            options = shuffleArray([wordObj.meaning, ...detractors.map(d => d.meaning)]);
+        } else if (type === 1) {
+            // Type 1: Which word means 'Meaning'?
+            question = `Which word means '${wordObj.meaning}'?`;
+            answer = wordObj.word;
+            options = shuffleArray([wordObj.word, ...detractors.map(d => d.word)]);
+        } else {
+            // Type 2: Fill in the blank (Example)
+            // Case insensitive replace
+            const regex = new RegExp(wordObj.word, "gi");
+            question = `Fill in the blank: "${wordObj.example.replace(regex, "_______")}"`;
+            answer = wordObj.word;
+            options = shuffleArray([wordObj.word, ...detractors.map(d => d.word)]);
+        }
+
+        return {
+            id: index,
+            question,
+            options,
+            answer
+        };
+    });
+};
 
 export default function Quiz() {
+    const [questions, setQuestions] = useState([]);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [score, setScore] = useState(0);
     const [showScore, setShowScore] = useState(false);
@@ -94,12 +94,19 @@ export default function Quiz() {
     };
 
     const resetQuiz = () => {
+        setQuestions(generateQuestions()); // Regenerate new questions
         setCurrentQuestion(0);
         setScore(0);
         setShowScore(false);
         setSelectedOption("");
         setIsCorrect(null);
     };
+
+    useEffect(() => {
+        setQuestions(generateQuestions());
+    }, []);
+
+    if (questions.length === 0) return <div className={styles.loading}>Loading Quiz...</div>;
 
     return (
         <div className={styles.quizContainer}>
