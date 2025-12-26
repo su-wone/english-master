@@ -121,3 +121,4 @@ MIT License
 ---
 
 Made with ❤️ by Kang Su Won
+>>>>>>> d2fbaee (docs: Translate README to Korean with comprehensive project information)
